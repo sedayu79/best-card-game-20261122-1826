@@ -4,7 +4,7 @@
 // pops, confetti). Layout constants live here and are mirrored by the Pillow
 // screenshot renderer, so a screenshot is the game's own drawing.
 import { SUITS } from './cards.js';
-import { HAND_SIZE, lossLine } from './rules.js';
+import { HAND_SIZE, MAX_EMBER, lossLine } from './rules.js';
 
 export const VIEW_W = 1280;
 export const VIEW_H = 720;
@@ -503,7 +503,7 @@ function drawComboBanner(ctx, state, fx) {
   ctx.restore();
 }
 
-function drawPlayerArea(ctx, state, ui) {
+function drawPlayerArea(ctx, state, fx, ui) {
   const L = LAYOUT;
   drawLifeBar(ctx, L.playerLife.x, L.playerLife.y, L.playerLife.w, L.playerLife.h, state.player.life, state.player.maxLife, state.player.shield, 'YOU');
   // Ember pips: ten, lit up to the current ember count.
@@ -667,7 +667,7 @@ function drawPlayScreen(ctx, state, fx, ui) {
   drawIntent(ctx, state);
   drawPlayed(ctx, state, fx);
   drawComboBanner(ctx, state, fx);
-  drawPlayerArea(ctx, state, ui);
+  drawPlayerArea(ctx, state, fx, ui);
   drawFloaters(ctx, fx);
   if (fx.flash > 0) {
     ctx.save();
